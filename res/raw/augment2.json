@@ -1,0 +1,144 @@
+{
+    "name": "Augment 2",
+    "pois": [
+        {
+		    "animationDuration": 3000,
+            "poiObjects": [
+ 				# south
+				{
+				    "billboardHandling" : "cylinder",
+				    "isActive": true,
+				    "name": "object0_1",
+					"startTime": 0,
+					"duration": 1500,
+                    "texture": "http://www.mission-base.com/augments/one.png",
+                    "startPosition": [
+                        {
+                            "x": -2,
+                            "y": 1.1,
+                            "z": 10
+                        }
+                    ],
+					"startScale": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+					"endScale": [
+                        {
+                            "x": 10,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ]
+                },
+				{
+				    "billboardHandling" : "cylinder",
+				    "isActive": true,
+				    "name": "object0_2",
+					"startTime": 1500,
+					"duration": 1500,
+                    "texture": "http://www.mission-base.com/augments/one.png",
+                    "startPosition": [
+                        {
+                            "x": -2,
+                            "y": 1.1,
+                            "z": 10
+                        }
+                    ],
+					"startScale": [
+                        {
+                            "x": 10,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+					"endScale": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ]
+                },
+				{
+				    "billboardHandling" : "cylinder",
+				    "isActive": true,
+				    "name": "object1",
+					"startTime": 0,
+					"duration": 3000,
+                    "texture": "http://www.mission-base.com/augments/one.png",
+                    "startPosition": [
+                        {
+                            "x": -1,
+                            "y": -1.1,
+                            "z": 10
+                        }
+                    ],
+					"startRotation": [
+                        {
+                            "x": 0,
+                            "y": 0,
+                            "z": 1,
+							"a": 0
+                        }
+                    ],
+					"endRotation": [
+                        {
+                            "x": 0,
+                            "y": 0,
+                            "z": 1,
+							"a": 360
+                        }
+					]
+				},
+                {
+                    "billboardHandling" : "cylinder",
+				    "isActive": true,
+				    "name": "object2",
+					"startTime": 0,
+					"duration": 1500,
+                    "texture": "http://www.mission-base.com/augments/one.png",
+                    "startPosition": [
+                        {
+                            "x": -2,
+                            "y": 0,
+                            "z": 10
+                        }
+                    ],
+					"endPosition": [
+                        {
+                            "x": 2,
+                            "y": 0,
+                            "z": 10
+                        }
+                    ]
+                },
+				{
+				    "billboardHandling" : "cylinder",
+				    "isActive": true,
+				    "name": "object3",
+					"startTime": 1500,
+					"duration": 1500,
+                    "texture": "http://www.mission-base.com/augments/two.png",
+                    "startPosition": [
+                        {
+                            "x": 2,
+                            "y": 0,
+                            "z": 10
+                        }
+                    ],
+					"endPosition": [
+                        {
+                            "x": -2,
+                            "y": 0,
+                            "z": 10
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,127 @@
+{
+    "label": "arvosAugment",
+    "name": "Augment 1",
+    "pois": [
+        {
+            "arvosVersion" : 1,
+            "animationDuration": 24,
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "developerKey": "Only users knowing this key can see it",
+            "poiObjects": [
+                {
+                    "name": "Object 1",
+                    "texture": "http://x.com/y.jpg",
+                    "billboardHandling": "None",
+                    "startTime": 0,
+                    "duration": 2,
+                    "loop": true,
+					"isActive": false,
+                    "startPosition": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+                    "endPosition": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+                    "startScale": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+                    "endScale": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ],
+                    "startRotation": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1,
+                            "a": 90
+                        }
+                    ],
+                    "endRotation": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1,
+                            "a": 180
+                        }
+                    ],
+                    "onClick": [
+                        {
+                            "url": "http://x.com/y.html",
+                            "activate": "OtherObjectName",
+                            "deactivate": "Object 2"
+                        },
+                        {
+                            "url": "http://foo.com/bar.html"
+                        }
+                    ],
+                    "onDurationEnd": [
+                        {
+                            "url": "http://x.com/y.html",
+                            "activate": "Object 2",
+                            "deactivate": "Object 3"
+                        }
+                    ]
+                },
+                {
+                    "name": "Object 2",
+                    "texture": "http://x.com/y.jpg",
+                    "startPosition": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "animationDuration": 24,
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "developerKey": "Only users knowing this key can see it",
+            "poiObjects": [
+                {
+                    "name": "Object 1",
+                    "texture": "http://x.com/y.jpg",
+                    "loop": true,
+                    "startPosition": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ]
+                },
+                {
+                    "name": "Object 2",
+                    "texture": "http://x.com/y.jpg",
+                    "startPosition": [
+                        {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

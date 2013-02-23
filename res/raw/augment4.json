@@ -1,0 +1,132 @@
+{
+  "name": "Augment 4",
+  "pois": [
+  {
+    "animationDuration": 3000,
+    "poiObjects": [
+    {
+      "billboardHandling" : "cylinder",
+      "isActive": true,
+      "name": "poiObject1_0",
+      "texture": "http://www.mission-base.com/augments/one.png",
+      "onClick" : [
+      {
+        "activate" : "poiObject3"
+      },
+      { 
+        "activate" : "poiObject1_1",
+        "deactivate" : "poiObject1_0"
+      } ],
+      "startPosition": [
+      {
+        "x": -1,
+        "y": -1.1,
+        "z": 10
+      } ],
+      "startRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 0
+      } ],
+      "endRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 360
+      } ] 
+    },
+    {
+      "billboardHandling" : "cylinder",
+      "isActive": false,
+      "name": "poiObject1_1",
+      "texture": "http://www.mission-base.com/augments/two.png",
+      "onClick" : [
+      {
+        "deactivate" : "poiObject3"
+      },
+      {
+        "deactivate" : "poiObject1_1",
+        "activate" : "poiObject1_0"
+      } ],
+      "startPosition": [
+      {
+        "x": -1,
+        "y": -1.1,
+        "z": 10
+      } ],
+      "startRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 0
+      } ],
+      "endRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 360
+      } ] 
+    },
+    {
+      "billboardHandling" : "cylinder",
+      "isActive": true,
+      "name": "poiObject2",
+      "texture": "http://www.mission-base.com/augments/two.png",
+      "onClick": [
+      {
+        "url": "http://www.mission-base.com/"
+      } ],
+      "startPosition": [
+      {
+        "x": -1,
+        "y": -0,
+        "z": 10
+      } ],
+      "startRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 0
+      } ],
+      "endRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 360
+      } ]
+    },
+    {
+      "billboardHandling" : "cylinder",
+      "isActive": false,
+      "name": "poiObject3",
+      "texture": "http://www.mission-base.com/augments/three.png",
+      "startPosition": [
+      {
+        "x": -1,
+        "y": 1.1,
+        "z": 10
+      } ],
+      "startRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 0
+      } ],
+      "endRotation": [
+      {
+        "x": 0,
+        "y": 0,
+        "z": 1,
+        "a": 360
+      } ]
+    } ]
+  } ] 
+}  

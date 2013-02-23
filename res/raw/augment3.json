@@ -1,0 +1,30 @@
+{
+    "name": "Augment 3",
+    "pois": [
+        {
+            "poiObjects": [
+                {
+                    "billboardHandling" : "none",
+                    "texture": "http://www.mission-base.com/augments/three.png",
+                    "startPosition": [
+                        {
+                            "x": -5,
+                            "y": -2,
+                            "z": -5
+                        }
+                    ]
+                },
+                {
+                    "texture": "http://www.mission-base.com/augments/three.png",
+                    "startPosition": [
+                        {
+                            "x": -5,
+                            "y": 2,
+                            "z": -5
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

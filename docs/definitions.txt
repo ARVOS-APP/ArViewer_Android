@@ -1,0 +1,55 @@
+
+The coordinate system is right handed, +x is right, +y is up, +z is pointing towards the camera.
+North is pointing to -z, south to +z, west is -x and east is +x, y is up.
+ 
+poi
+{
+  AnimationDuration = 0;  // milliseconds of length of an animation cycle, default 0, 0 means no animations
+  
+  Lat = 48.1234;          // latitude degrees, default 'null', 'null' means use camera value
+                          // if the value is given and is different from the camera value,
+						  // the following conversion formula is used for the difference
+						  // 1 deg = 60 * 1852 m = 111120 m
+						  
+  Lon = 100.1234;         // longitude degrees, default 'null', 'null' means use camera value
+                          // if the values are given and is different from the camera value,
+						  // the following conversion formula is used for the difference
+						  // 1 deg = 60 * 1852 m * cos(lat) = 111120 m * cos(lat)
+						  // for lat == 0, 1 deg lon = 60 * 1852 m = 111120 m
+						  // for lat == 45, 1 deg lon = 111120 m * 0.707106 = 78573.706
+						  
+  poiObject
+  {
+    name = "ObjectName";
+	
+    texture = "http://x.com/y.jpg";
+	
+	billboardHandling = "None|Simple|Cylinder|Sphere";
+	
+    startTime = 0;        // milliseconds, default 0, 0 means object visible when loaded
+	duration = 1000;      // milliseconds, default 0, 0 means AnimationDuration is used
+	                      // The AnimationTime runs for each animation cycle from 0 up to AnimationDuration
+						  // If for an object ( StartTime <= AnimationTime && EndTime < AnimationTime ) is true
+                          // the object is shown
+						  
+	loop = true           // true/false, default true, true means animation loops in each animation cycle
+	isActive = true;      // true/false, default true, object is only shown when active
+	
+	startScale = 1.0, 1.0, 1.0;
+	endScale   = 2.0, 2.0, 2.0;
+	
+	startTranslation = 1.0, 1.0, 1.0;
+	endTranslation   = 2.0, 2.0, 2.0;
+
+	startRotation = 1.0, 1.0, 1.0, 90;   
+	endRotation   = 1.0, 1.0, 1.0, 180;
+	
+    onClick       = "Hide,Url="http://x.com/y.html",Activate="OtherObjectName";
+    onDurationEnd = "Hide,Activate="OtherObjectName";
+  }
+  poiObject
+  {
+    name = "OtherObjectName";
+	...
+  }
+}

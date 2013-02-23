@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <CheckBoxPreference
+    android:key="PREF_USE_CACHE"
+    android:title="Use texture cache"
+    android:summary="Select to cache textures of augments on device"
+    android:defaultValue="true"
+  />
+
+ <EditTextPreference
+    android:key="PREF_AUTHOR_KEY"
+    android:title="Author key"
+    android:summary="Enter a secret private key, at least 20 alphanumeric characters"
+  />
+
+ <EditTextPreference
+    android:key="PREF_DEVELOPER_KEY"
+    android:title="Developer key"
+    android:summary="Enter a key of alphanumeric characters"
+  />
+
+ </PreferenceScreen>

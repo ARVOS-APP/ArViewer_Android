@@ -1,0 +1,64 @@
+# Arvos augments list example.
+# 
+# Copyright (C) 2013, Peter Graf,
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+# I know it is against the JSON spec, but Arvos allows lines starting with '#' as comment lines.
+#
+{
+    # Redirect to another url
+    #
+    # "redirect": "http://www.mission-base.com/arvos/augments.json",
+    
+    # A session id to be used for requests to the Arvos server
+    #
+    "sessionId" : "abcdef01",
+    
+    # List of augments
+    #
+    "augments": [
+        {
+            "arvosVersion" : 1,
+            "name": "Test Augment 1",
+            "author": "Peter Graf",
+            "url": "http://www.mission-base.com/augments/augment1.json",
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "description": "This is the first test augment.",
+            "category": "Art"
+        },
+        {
+            "arvosVersion" : 1,
+            "name": "Test Augment 2",
+            "author": "Peter Graf",
+            "url": "http://www.mission-base.com/augments/augment2.json",
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "description": "This is the second test augment.",
+            "category": "Art"
+        },
+        {
+            "arvosVersion" : 1,
+            "name": "Test Augment 3",
+            "author": "Peter Graf",
+            "url": "http://www.mission-base.com/augments/augment3.json",
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "description": "This is the third test augment.",
+            "category": "Art"
+        },
+        {
+            "arvosVersion" : 1,
+            "name": "Test Augment 4",
+            "author": "Peter Graf",
+            "url": "http://www.mission-base.com/augments/augment4.json",
+            "lat": 45.123456,
+            "lon": 100.123456,
+            "description": "This is the forth test augment.",
+            "category": "Art"
+        }
+    ]
+}

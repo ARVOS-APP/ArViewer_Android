@@ -25,7 +25,25 @@ package com.mission_base.arviewer_android;
 
 import android.graphics.Bitmap;
 
+/**
+ * Interface for receiving http results.
+ * 
+ * @author peter
+ * 
+ */
 public interface IArvosHttpReceiver
 {
-	public void onHttpResponse( String url, String error, String text, Bitmap bitmap);
+	/**
+	 * Handles http responses of asynchronous http requests.
+	 * 
+	 * @param url
+	 *            The url of the requested file.
+	 * @param error
+	 *            The error if any.
+	 * @param text
+	 *            The contents of a text file downloaded.
+	 * @param bitmap
+	 *            The contents of an image file downloaded.
+	 */
+	public void onHttpResponse(String url, String error, String text, Bitmap bitmap);
 }

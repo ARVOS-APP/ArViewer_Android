@@ -30,6 +30,12 @@ import android.graphics.Bitmap;
 import com.mission_base.arviewer_android.Arvos;
 import com.mission_base.arviewer_android.viewer.utilities.MatrixUtils;
 
+/**
+ * An object to be shown in the opengl view.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosObject extends Square
 {
 	public static final String BillboardHandlingNone = "none";
@@ -56,6 +62,9 @@ public class ArvosObject extends Square
 		mInstance = Arvos.getInstance();
 	}
 
+	/**
+	 * Draws the object in the opengl view.
+	 */
 	public void draw(GL10 gl)
 	{
 		if (!mTextureLoaded)
@@ -123,13 +132,20 @@ public class ArvosObject extends Square
 		super.draw(gl);
 	}
 
-	/*----------------------------------------------------------------
-	True billboarding. With the spherical version the object will 
-	always face the camera. It requires more computational effort than
-	the cylindrical billboard though. The parameters camX,camY, and camZ,
-	are the target, i.e. a 3D point to which the object will point.
-	----------------------------------------------------------------*/
-
+	/**
+	 * True billboarding. With the spherical version the object will always face
+	 * the camera. It requires more computational effort than the cylindrical
+	 * billboard though. The parameters camX,camY, and camZ, are the target,
+	 * i.e. a 3D point to which the object will point.
+	 * 
+	 * @param gl
+	 * @param camX
+	 * @param camY
+	 * @param camZ
+	 * @param posX
+	 * @param posY
+	 * @param posZ
+	 */
 	protected void l3dBillboardSphericalBegin(GL10 gl, float camX, float camY, float camZ, float posX, float posY, float posZ)
 	{
 		float[] lookAt = new float[] { 0, 0, 1 };
@@ -199,18 +215,26 @@ public class ArvosObject extends Square
 		}
 	}
 
-	/*-----------------------------------------------------------------
-	The objects motion is restricted to a rotation on a predefined axis
-	The function bellow does cylindrical billboarding on the Y axis, i.e.
-	the object will be able to rotate on the Y axis only.
-	-----------------------------------------------------------------*/
-
+	/**
+	 * The objects motion is restricted to a rotation on a predefined axis The
+	 * function bellow does cylindrical billboarding on the Y axis, i.e. the
+	 * object will be able to rotate on the Y axis only.
+	 * 
+	 * @param camX
+	 * @param camY
+	 * @param camZ
+	 * @param posX
+	 * @param posY
+	 * @param posZ
+	 * @param pUpAux
+	 * @return
+	 */
 	public static float l3dBillboardCylindricalDegrees(float camX, float camY, float camZ, float posX, float posY, float posZ, float[] pUpAux)
 	{
 		float[] lookAt = new float[] { 0, 0, 1 };
 		float[] objToCamProj = new float[3];
 		float[] upAux = pUpAux;
-		if( upAux == null)
+		if (upAux == null)
 		{
 			upAux = new float[3];
 		}
@@ -246,11 +270,22 @@ public class ArvosObject extends Square
 		return Float.NaN;
 	}
 
+	/**
+	 * Cylindrical billboarding.
+	 * 
+	 * @param gl
+	 * @param camX
+	 * @param camY
+	 * @param camZ
+	 * @param posX
+	 * @param posY
+	 * @param posZ
+	 */
 	public static void l3dBillboardCylindricalBegin(GL10 gl, float camX, float camY, float camZ, float posX, float posY, float posZ)
 	{
 		float[] upAux = new float[3];
 		float f = l3dBillboardCylindricalDegrees(camX, camY, camZ, posX, posY, posZ, upAux);
-		if( !Float.isNaN(f))
+		if (!Float.isNaN(f))
 		{
 			gl.glRotatef(f, upAux[0], upAux[1], upAux[2]);
 		}

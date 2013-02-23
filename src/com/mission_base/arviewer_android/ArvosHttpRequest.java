@@ -42,12 +42,26 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Pair;
 
+/**
+ * Handling http downloads asynchronously.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosHttpRequest
 {
 	private Arvos mInstance;
 	private IArvosHttpReceiver mReceiver;
 	private Context mContext;
 
+	/**
+	 * Creates a new asynchronous http request.
+	 * 
+	 * @param receiver
+	 *            The receiver of the downloaded file.
+	 * @param context
+	 *            The application context.
+	 */
 	public ArvosHttpRequest(IArvosHttpReceiver receiver, Context context)
 	{
 		mInstance = Arvos.getInstance();
@@ -55,11 +69,23 @@ public class ArvosHttpRequest
 		mContext = context;
 	}
 
+	/**
+	 * Downloads a text file from the web.
+	 * 
+	 * @param url
+	 *            The url of the file to download.
+	 */
 	public void getText(String url)
 	{
 		new DownloadTextTask().execute(url);
 	}
 
+	/**
+	 * Downloads an image file from the web.
+	 * 
+	 * @param url
+	 *            The url of the file to download.
+	 */
 	public void getImage(String url)
 	{
 		new DownloadImageTask().execute(url);
@@ -228,6 +254,13 @@ public class ArvosHttpRequest
 		return stringBuilder.toString();
 	}
 
+	/**
+	 * Encodes an url.
+	 * 
+	 * @param in
+	 *            The url to encode.
+	 * @return The endoced url.
+	 */
 	public static String urlEncode(String in)
 	{
 		try

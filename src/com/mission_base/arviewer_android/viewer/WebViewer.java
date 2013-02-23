@@ -29,7 +29,13 @@ import android.view.*;
 import android.webkit.*;
 import com.mission_base.arviewer_android.*;
 
-public class WebViewer extends Activity 
+/**
+ * The web viewer used to showing web pages liked by pois.
+ * 
+ * @author peter
+ * 
+ */
+public class WebViewer extends Activity
 {
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,36 +46,34 @@ public class WebViewer extends Activity
 
 		setContentView(R.layout.web_viewer_main);
 
-        WebView webView = (WebView) findViewById(R.id.WebView01);
-        webView.setWebViewClient(new Callback());
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setBuiltInZoomControls(true);
+		WebView webView = (WebView) findViewById(R.id.WebView01);
+		webView.setWebViewClient(new Callback());
+		WebSettings webSettings = webView.getSettings();
+		webSettings.setBuiltInZoomControls(true);
 
+		// ---Part 1---
+		webView.loadUrl(url);
 
-        //---Part 1---
-        webView.loadUrl(url);       
+		// ---Part 2---
+		// final String mimeType = "text/html";
+		// final String encoding = "UTF-8";
+		// String html =
+		// "<H1>A simple HTML page</H1><body>" +
+		// "<p>The quick brown fox jumps over the lazy dog</p></body>";
+		// webView.loadDataWithBaseURL("", html, mimeType, encoding, "");
 
-        //---Part 2---
-        //final String mimeType = "text/html";
-        //final String encoding = "UTF-8";
-        //String html = 
-		//	"<H1>A simple HTML page</H1><body>" +
-		//	"<p>The quick brown fox jumps over the lazy dog</p></body>";
-        //webView.loadDataWithBaseURL("", html, mimeType, encoding, "");
+		// ---Part 3---
+		// webView.loadUrl("file:///android_asset/index.html");
+	}
 
-        //---Part 3---
-        //webView.loadUrl("file:///android_asset/index.html");
-    }
-
-    private class Callback extends WebViewClient
+	private class Callback extends WebViewClient
 	{
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, 
-												String url)
+		@Override
+		public boolean shouldOverrideUrlLoading(WebView view, String url)
 		{
-            return (false);
-        }
-    } 
+			return (false);
+		}
+	}
 
 	@Override
 	protected void onResume()
@@ -98,7 +102,7 @@ public class WebViewer extends Activity
 		// Create the Menu Item and keep a reference to it
 		MenuItem menuItem = menu.add(groupId, menuItemId, menuItemOrder, menuItemText);
 		menuItem = menu.add(groupId, menuItemId++, menuItemOrder, menuItemText);
-		//	menuItem.setIcon(R.drawable.ic_action_refresh_white);
+		// menuItem.setIcon(R.drawable.ic_action_refresh_white);
 		menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
 		return true;
@@ -110,10 +114,10 @@ public class WebViewer extends Activity
 
 		switch (item.getItemId())
 		{
-			case (MENU_ITEM_CLOSE):
-				finish();
-				return true;
+		case (MENU_ITEM_CLOSE):
+			finish();
+			return true;
 		}
 		return false;
-	}	
+	}
 }

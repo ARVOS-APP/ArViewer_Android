@@ -35,6 +35,12 @@ import android.widget.TextView;
 
 import com.mission_base.arviewer_android.viewer.Augment;
 
+/**
+ * Adapter used for displaying the list of augments.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosCustomArrayAdapter extends ArrayAdapter<Augment>
 {
 	private final Activity context;

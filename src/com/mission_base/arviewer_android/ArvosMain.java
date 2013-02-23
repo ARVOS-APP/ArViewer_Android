@@ -46,6 +46,16 @@ import android.widget.Toast;
 import com.mission_base.arviewer_android.viewer.ArvosViewer;
 import com.mission_base.arviewer_android.viewer.Augment;
 
+/**
+ * The main activity of the Arvos app.
+ * <P>
+ * Downloads the list of augments and displays them in a list. When an augment
+ * is selected it downloads the augments and calls the ArvosViewer app for
+ * displaying the augment.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosMain extends ListActivity implements IArvosLocationReceiver, IArvosHttpReceiver
 {
 	private ArrayList<Augment> mAugments = new ArrayList<Augment>();
@@ -57,7 +67,6 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 	private static long mMaxAge = 1000L * 60 * 60 * 24 * 30;
 	private static long mMaxSize = 64 * 1024 * 1024;
 	private static int mMaxFiles = 256;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -72,9 +81,12 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 		setListAdapter(adapter);
 
 		updateFromPreferences();
-		ArvosCache.initialize(this, mMaxAge, mMaxFiles, mMaxSize );
+		ArvosCache.initialize(this, mMaxAge, mMaxFiles, mMaxSize);
 	}
 
+	/**
+	 * Handles clicks on the augment list items.
+	 */
 	public void onListItemClick(ListView parent, View v, int position, long id)
 	{
 		mMenuPreferencesCount = 0;
@@ -147,7 +159,9 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 		mArvosHttpRequest = null;
 	}
 
-	@Override
+	/**
+	 * Handles http responses from http requests.
+	 */
 	public void onHttpResponse(String url, String error, String text, Bitmap bitmap)
 	{
 		if (error.startsWith("ER"))
@@ -212,7 +226,9 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 
 	private boolean hasInitialAugmentsRequest = false;
 
-	@Override
+	/**
+	 * Handles location updates sent from the location listener.
+	 */
 	public void onLocationChanged(boolean isNew, Location location)
 	{
 		if (isNew && !hasInitialAugmentsRequest)
@@ -231,6 +247,9 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 	static final private int MENU_PREFERENCES = Menu.FIRST + 1;
 	private static final int SHOW_PREFERENCES = 1;
 
+	/**
+	 * Creates the menu.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -251,6 +270,9 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 		return true;
 	}
 
+	/**
+	 * Handles menu item selections.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		super.onOptionsItemSelected(item);

@@ -36,6 +36,12 @@ import com.mission_base.arviewer_android.Arvos;
 import com.mission_base.arviewer_android.viewer.utilities.MatrixGrabber;
 import com.mission_base.arviewer_android.viewer.utilities.MatrixTrackingGL;
 
+/**
+ * Opengl renderer.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosRenderer implements Renderer
 {
 	private Arvos mInstance;

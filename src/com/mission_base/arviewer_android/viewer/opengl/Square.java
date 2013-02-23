@@ -36,6 +36,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLUtils;
 
+/**
+ * The basic object shown in the opengl view, a square with a texture on it.
+ * 
+ * @author peter
+ * 
+ */
 public class Square
 {
 	private FloatBuffer vertexBuffer; // buffer holding the vertices

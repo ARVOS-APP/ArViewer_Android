@@ -33,6 +33,14 @@ import android.widget.*;
 import com.mission_base.arviewer_android.*;
 import com.mission_base.arviewer_android.viewer.opengl.*;
 
+/**
+ * The augment viewer application.
+ * <p>
+ * Shows the camera view, overlays it with the augment being shown an opengl view
+ * and overlays both with the radar view.
+ * @author peter
+ *
+ */
 public class ArvosViewer extends Activity implements IArvosLocationReceiver, IArvosHttpReceiver
 {
 	public ArvosCameraView mCameraView = null;

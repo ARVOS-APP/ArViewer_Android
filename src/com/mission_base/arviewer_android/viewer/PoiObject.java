@@ -29,6 +29,12 @@ import com.mission_base.arviewer_android.viewer.opengl.*;
 import java.util.*;
 import org.json.*;
 
+/**
+ * A poi object as shown in the opengl view.
+ * 
+ * @author peter
+ * 
+ */
 public class PoiObject
 {
 	private static int mNextId = 0;
@@ -71,6 +77,12 @@ public class PoiObject
 
 	public Bitmap mBitmap;
 
+	/**
+	 * Create a poi object.
+	 * 
+	 * @param parent
+	 *            The poi the object belongs to.
+	 */
 	public PoiObject(Poi parent)
 	{
 		mId = getNextId();
@@ -79,6 +91,14 @@ public class PoiObject
 		mIsActive = true;
 	}
 
+	/**
+	 * Parses one poi object.
+	 * 
+	 * @param jsonPoiObject
+	 *            The JSON input to parse.
+	 * @throws JSONException
+	 *             JSON parse exception.
+	 */
 	public void parse(JSONObject jsonPoiObject) throws JSONException
 	{
 		if (jsonPoiObject != null)
@@ -88,9 +108,9 @@ public class PoiObject
 			mName = jsonPoiObject.has("name") ? jsonPoiObject.getString("name") : null;
 			mBillboardHandling = jsonPoiObject.has("billboardHandling") ? jsonPoiObject.getString("billboardHandling") : null;
 			if (mBillboardHandling != null //
-				&& !ArvosObject.BillboardHandlingCylinder.equals(mBillboardHandling) //
-				&& !ArvosObject.BillboardHandlingNone.equals(mBillboardHandling) //
-				&& !ArvosObject.BillboardHandlingSphere.equals(mBillboardHandling))
+					&& !ArvosObject.BillboardHandlingCylinder.equals(mBillboardHandling) //
+					&& !ArvosObject.BillboardHandlingNone.equals(mBillboardHandling) //
+					&& !ArvosObject.BillboardHandlingSphere.equals(mBillboardHandling))
 			{
 				throw new JSONException("Illegal value for billboardHandling: " + mBillboardHandling);
 			}
@@ -187,6 +207,14 @@ public class PoiObject
 		}
 	}
 
+	/**
+	 * Parses 3 float values, x, y, and z.
+	 * 
+	 * @param jsonObject
+	 * @param name
+	 * @return
+	 * @throws JSONException
+	 */
 	public static float[] parseVec3f(JSONObject jsonObject, String name) throws JSONException
 	{
 		float[] result = null;
@@ -206,6 +234,14 @@ public class PoiObject
 		return result;
 	}
 
+	/**
+	 * Parses 4 float values, x, y, z and a.
+	 * 
+	 * @param jsonObject
+	 * @param name
+	 * @return
+	 * @throws JSONException
+	 */
 	public static float[] parseVec4f(JSONObject jsonObject, String name) throws JSONException
 	{
 		float[] result = null;
@@ -241,6 +277,15 @@ public class PoiObject
 	private long mWorldStartTime = -1;
 	private long mWorldIteration = -1;
 
+	/**
+	 * Returns the arvos object to be drawn in the opengl view.
+	 * 
+	 * @param time
+	 *            The current time.
+	 * @param arvosObjects
+	 *            List of previous objects.
+	 * @return The object.
+	 */
 	public ArvosObject getObject(long time, List<ArvosObject> arvosObjects)
 	{
 		if (mWorldStartTime < 0)
@@ -338,6 +383,9 @@ public class PoiObject
 		return result;
 	}
 
+	/**
+	 * Called when the animation of the object stops.
+	 */
 	public void stop()
 	{
 		onDurationEnd();
@@ -352,11 +400,20 @@ public class PoiObject
 		}
 	}
 
+	/**
+	 * Called when the animation of the object starts.
+	 * 
+	 * @param time
+	 *            The current time.
+	 */
 	public void start(long time)
 	{
 		mTimeStarted = time;
 	}
 
+	/**
+	 * Handles a click on the object.
+	 */
 	public void onClick()
 	{
 		handleAction(mOnClickActivates, mOnClickDeactivates, mOnClickUrls);

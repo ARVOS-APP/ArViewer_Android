@@ -27,5 +27,13 @@ import android.location.Location;
 
 public interface IArvosLocationReceiver
 {
+	/**
+	 * Handles asynchronous location updates.
+	 * 
+	 * @param isNew
+	 *            A flag set when the location is new.
+	 * @param location
+	 *            The location received.
+	 */
 	public void onLocationChanged(boolean isNew, Location location);
 }

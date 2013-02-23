@@ -49,6 +49,15 @@ import android.view.View;
 import com.mission_base.arviewer_android.Arvos;
 import com.mission_base.arviewer_android.viewer.opengl.ArvosObject;
 
+/**
+ * The view showing the radar heads up display.
+ * <p>
+ * Uses the orientation sensors of the device and updates the orientation values
+ * of the instance.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosRadarView extends View
 {
 	private Arvos mInstance;
@@ -68,6 +77,12 @@ public class ArvosRadarView extends View
 	private float Imat[] = new float[9];
 	private float mOrientation[] = new float[3];
 
+	/**
+	 * Creates the view.
+	 * 
+	 * @param context
+	 *            The application context.
+	 */
 	public ArvosRadarView(Context context)
 	{
 		super(context);
@@ -146,7 +161,7 @@ public class ArvosRadarView extends View
 		return y;
 	}
 
-	public void processSensorData()
+	private void processSensorData()
 	{
 		if (mGravity != null && mGeomagnetic != null)
 		{
@@ -177,6 +192,9 @@ public class ArvosRadarView extends View
 		}
 	}
 
+	/**
+	 * Draws the radar heads up display
+	 */
 	protected void onDraw(Canvas canvas)
 	{
 		int width = getWidth();

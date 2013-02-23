@@ -29,6 +29,12 @@ import com.mission_base.arviewer_android.viewer.opengl.*;
 import java.util.*;
 import org.json.*;
 
+/**
+ * A poi - point of interest.
+ * 
+ * @author peter
+ * 
+ */
 public class Poi
 {
 	public long mAnimationDuration;
@@ -46,6 +52,12 @@ public class Poi
 
 	private Arvos mInstance;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param augment
+	 *            The augment the poi belongs to.
+	 */
 	public Poi(Augment augment)
 	{
 		mParent = augment;
@@ -53,6 +65,14 @@ public class Poi
 		mInstance = Arvos.getInstance();
 	}
 
+	/**
+	 * Parses the description of a poi in JSON format.
+	 * 
+	 * @param jsonPoi
+	 *            The JSON object to parse.
+	 * @throws JSONException
+	 *             JSON parse exceptions.
+	 */
 	public void parse(JSONObject jsonPoi) throws JSONException
 	{
 		mAnimationDuration = jsonPoi.has("animationDuration") ? jsonPoi.getInt("animationDuration") : 0;
@@ -86,6 +106,18 @@ public class Poi
 		return;
 	}
 
+	/**
+	 * Returns the list of all objects to be drawn for the augment in the opengl
+	 * view.
+	 * 
+	 * @param time
+	 *            Returns the list of all objects to be drawn for the augment in
+	 *            the opengl view.
+	 * @param result
+	 *            The list to add the resulting objects to.
+	 * @param arvosObjects
+	 *            The previous list of objects.
+	 */
 	public void getObjects(long time, List<ArvosObject> result, List<ArvosObject> arvosObjects)
 	{
 		float deviceLatitude = mInstance.mLatitude;
@@ -161,7 +193,7 @@ public class Poi
 				result.add(arvosObject);
 			}
 		}
-		
+
 		synchronized (mObjectsClicked)
 		{
 			for (PoiObject poiObject : mObjectsClicked)
@@ -195,6 +227,12 @@ public class Poi
 		mObjectsToStart.clear();
 	}
 
+	/**
+	 * Searches a poi object by name.
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public PoiObject findPoiObject(String name)
 	{
 		for (PoiObject poiObject : mPoiObjects)
@@ -216,6 +254,13 @@ public class Poi
 		}
 		return null;
 	}
+
+	/**
+	 * Searches a poi object by id.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public PoiObject findPoiObject(int id)
 	{
 		for (Poi poi : mParent.mPois)
@@ -231,28 +276,53 @@ public class Poi
 		return null;
 	}
 
+	/**
+	 * Handles activation of a poi object.
+	 * 
+	 * @param poiObject
+	 */
 	public void requestActivate(PoiObject poiObject)
 	{
 		poiObject.mIsActive = true;
 		requestStart(poiObject);
 	}
 
+	/**
+	 * Handles the start of a poi object animation.
+	 * 
+	 * @param poiObject
+	 */
 	public void requestStart(PoiObject poiObject)
 	{
 		mObjectsToStart.add(poiObject);
 	}
 
+	/**
+	 * Handles the stop of a poi object animation.
+	 * 
+	 * @param poiObject
+	 */
 	public void requestStop(PoiObject poiObject)
 	{
 		mObjectsToDeactivate.add(poiObject);
 	}
 
+	/**
+	 * Handles the deactivation of a poi object.
+	 * 
+	 * @param poiObject
+	 */
 	public void requestDeactivate(PoiObject poiObject)
 	{
 		poiObject.mIsActive = false;
 		requestStop(poiObject);
 	}
 
+	/**
+	 * Handles a click on a poi object.
+	 * 
+	 * @param poiObject
+	 */
 	public void addClick(PoiObject poiObject)
 	{
 		synchronized (mObjectsClicked)

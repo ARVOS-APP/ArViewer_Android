@@ -30,6 +30,12 @@ import android.view.MotionEvent;
 
 import com.mission_base.arviewer_android.Arvos;
 
+/**
+ * The opengl view showing the pois.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosGLSurfaceView extends GLSurfaceView
 {
 	private Arvos mInstance;

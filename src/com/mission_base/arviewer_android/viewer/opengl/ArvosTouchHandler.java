@@ -32,6 +32,14 @@ import com.mission_base.arviewer_android.viewer.utilities.Ray;
 import com.mission_base.arviewer_android.viewer.utilities.Triangle;
 import com.mission_base.arviewer_android.viewer.utilities.Vector;
 
+/**
+ * Handles touches in the opengl view.
+ * <p>
+ * Finds out which object was clicked if any.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosTouchHandler extends Thread
 {
 	private static String Lock = "Lock";

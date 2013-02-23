@@ -31,6 +31,12 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.widget.TextView;
 
+/**
+ * The view showing current state of the application.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosTextView extends TextView
 {
 	private LocationManager mLocationManager;
@@ -43,6 +49,9 @@ public class ArvosTextView extends TextView
 		setTextColor(Color.RED);
 	}
 
+	/**
+	 * Handles location updates displays some state information.
+	 */
 	public void updateWithNewLocation()
 	{
 		String provider = LocationManager.GPS_PROVIDER;

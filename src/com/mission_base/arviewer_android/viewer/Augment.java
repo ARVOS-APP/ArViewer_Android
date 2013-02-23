@@ -28,6 +28,14 @@ import com.mission_base.arviewer_android.viewer.opengl.*;
 import java.util.*;
 import org.json.*;
 
+/**
+ * An augment as shown in the augment viewer.
+ * <p>
+ * Contains a list of pois.
+ * 
+ * @author peter
+ * 
+ */
 public class Augment
 {
 	public String mName;
@@ -45,6 +53,15 @@ public class Augment
 		mPois = new LinkedList<Poi>();
 	}
 
+	/**
+	 * Parses the JSON format augment list downloaded from the web.
+	 * 
+	 * @param input
+	 *            The input in JSON format.
+	 * @param result
+	 *            The list of augments to parse to.
+	 * @return "OK" or "ER" followed by the error message.
+	 */
 	public static String parse(String input, List<Augment> result)
 	{
 		try
@@ -110,6 +127,14 @@ public class Augment
 		return "OK";
 	}
 
+	/**
+	 * Fills the properties of one augment by parsing a description in JSON
+	 * format downloaded from the web.
+	 * 
+	 * @param input
+	 *            The augment description in JSON format.
+	 * @return "OK" or "ER" followed by the error message.
+	 */
 	public String parse(String input)
 	{
 		try
@@ -145,11 +170,15 @@ public class Augment
 		return "OK";
 	}
 
-	public void add(Poi poi)
-	{
-		mPois.add(poi);
-	}
-
+	/**
+	 * Returns the list of all objects to be drawn for the augment in the opengl view.
+	 * 
+	 * @param time
+	 *            The current time.
+	 * @param arvosObjects
+	 *            The previous list of objects.
+	 * @return Returns the list of all objects.
+	 */
 	public List<ArvosObject> getObjects(long time, List<ArvosObject> arvosObjects)
 	{
 		List<ArvosObject> result = new LinkedList<ArvosObject>();
@@ -164,6 +193,12 @@ public class Augment
 		return result;
 	}
 
+	/**
+	 * Handles a click on an object in the opengl view.
+	 * 
+	 * @param id
+	 *            The id of the object clicked.
+	 */
 	public void addClick(int id)
 	{
 		synchronized (this)

@@ -34,14 +34,24 @@ import android.view.SurfaceView;
 
 import com.mission_base.arviewer_android.Arvos;
 
-//import android.app.Activity;
-
+/**
+ * The view showing the camera preview.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosCameraView extends SurfaceView implements SurfaceHolder.Callback
 {
 	private static String mTag = "ArvosCameraView";
 	private SurfaceHolder mHolder;
 	private Camera mCamera;
 
+	/**
+	 * Create the camera view.
+	 * 
+	 * @param context
+	 *            The application context.
+	 */
 	@SuppressWarnings("deprecation")
 	ArvosCameraView(Context context)
 	{

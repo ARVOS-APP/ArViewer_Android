@@ -23,18 +23,47 @@
 
 package com.mission_base.arviewer_android;
 
+/**
+ * An entry in the ArvosCache.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosCacheEntry implements Comparable<Object>
 {
+	/**
+	 * Compares two entries by their last access time.
+	 */
 	public int compareTo(Object other)
 	{
 		return lastAccessTime.compareTo(((ArvosCacheEntry) other).lastAccessTime);
 	}
 
-	String url;
-	int urlLength;
-	long fileLength;
-	Long lastAccessTime;
+	/**
+	 * The url of the entry
+	 */
+	public String url;
 
+	/**
+	 * The length of the url in the file.
+	 */
+	public int urlLength;
+
+	/**
+	 * The length of the file.
+	 */
+	public long fileLength;
+
+	/**
+	 * The last access time of the entry.
+	 */
+	public Long lastAccessTime;
+
+	/**
+	 * Returns the file name.
+	 * 
+	 * @return The file name
+	 */
 	public String getFileName()
 	{
 		return lastAccessTime.toString() + ArvosCache.mExtension;

@@ -26,14 +26,21 @@ package com.mission_base.arviewer_android;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+/**
+ * Activity for handling the Arvos preferences.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosPreferences extends PreferenceActivity
 {
 	public static final String PREF_USE_CACHE = "PREF_USE_CACHE";
 
 	public static final String PREF_IS_AUTHOR = "PREF_IS_AUTHOR";
 	public static final String PREF_AUTHOR_KEY = "PREF_AUTHOR_KEY";
-	public static final String PREF_DEVELOPER_KEY= "PREF_DEVELOPER_KEY";
+	public static final String PREF_DEVELOPER_KEY = "PREF_DEVELOPER_KEY";
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{

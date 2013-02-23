@@ -30,12 +30,26 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * Listens for location updates from the LocationManager.
+ * 
+ * @author peter
+ * 
+ */
 public class ArvosLocationListener implements LocationListener
 {
 	private IArvosLocationReceiver mReceiver;
 	private LocationManager mLocationManager;
 	private Arvos mInstance;
 
+	/**
+	 * Creates a new listener.
+	 * 
+	 * @param locationManager
+	 *            The location manager to listen to.
+	 * @param receiver
+	 *            The receiver of the location updates.
+	 */
 	public ArvosLocationListener(LocationManager locationManager, IArvosLocationReceiver receiver)
 	{
 		mLocationManager = locationManager; // (LocationManager)

@@ -44,7 +44,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mission_base.arviewer_android.viewer.ArvosViewer;
-import com.mission_base.arviewer_android.viewer.Augment;
+import com.mission_base.arviewer_android.viewer.ArvosAugment;
 
 /**
  * The main activity of the Arvos app.
@@ -58,7 +58,7 @@ import com.mission_base.arviewer_android.viewer.Augment;
  */
 public class ArvosMain extends ListActivity implements IArvosLocationReceiver, IArvosHttpReceiver
 {
-	private ArrayList<Augment> mAugments = new ArrayList<Augment>();
+	private ArrayList<ArvosAugment> mAugments = new ArrayList<ArvosAugment>();
 
 	private ArvosLocationListener mLocationListener;
 	private Arvos mInstance;
@@ -91,7 +91,7 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 	{
 		mMenuPreferencesCount = 0;
 
-		Augment augment = mAugments.get(position);
+		ArvosAugment augment = mAugments.get(position);
 		String name = augment.mName;
 		String url = augment.mUrl;
 
@@ -138,7 +138,7 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 		mArvosHttpRequest.getText(mInstance.mAugmentsUrl);
 	}
 
-	private void requestAugment(Augment augment)
+	private void requestAugment(ArvosAugment augment)
 	{
 		ActionBar actionBar = getActionBar();
 
@@ -175,7 +175,7 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 		if (mInstance.mAugmentsUrl.equals(url))
 		{
 			mAugments.clear();
-			error = Augment.parse(text, mAugments);
+			error = ArvosAugment.parse(text, mAugments);
 			if (error.startsWith("RD"))
 			{
 				mInstance.mAugmentsUrl = error.substring(2);
@@ -201,12 +201,12 @@ public class ArvosMain extends ListActivity implements IArvosLocationReceiver, I
 
 		for (int i = 0; i < mAugments.size(); i++)
 		{
-			Augment augment = mAugments.get(i);
+			ArvosAugment augment = mAugments.get(i);
 			if (url.equals(augment.mUrl))
 			{
 				String name = augment.mName;
 
-				Augment parsedAugment = new Augment();
+				ArvosAugment parsedAugment = new ArvosAugment();
 				error = parsedAugment.parse(text);
 				if (error.startsWith("ER"))
 				{

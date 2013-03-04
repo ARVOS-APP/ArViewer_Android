@@ -34,7 +34,7 @@ import android.content.Intent;
 import android.hardware.SensorManager;
 import android.view.OrientationEventListener;
 
-import com.mission_base.arviewer_android.viewer.Augment;
+import com.mission_base.arviewer_android.viewer.ArvosAugment;
 import com.mission_base.arviewer_android.viewer.WebViewer;
 import com.mission_base.arviewer_android.viewer.opengl.ArvosObject;
 
@@ -48,7 +48,7 @@ import com.mission_base.arviewer_android.viewer.opengl.ArvosObject;
 @SuppressLint("UseSparseArrays")
 public class Arvos
 {
-	public boolean mSimulateWeb = true;
+	public boolean mSimulateWeb = false;
 
 	public boolean mUseCache = true;
 	public boolean mIsAuthor = false;
@@ -67,7 +67,7 @@ public class Arvos
 	public float mLatitude = -1000f;
 	public int mVersion = 1;
 
-	public Augment mAugment;
+	public ArvosAugment mAugment;
 	public String mAugmentsUrl = "http://www.mission-base.com/arvos/augments.json";
 
 	public float mAzimuth = 0;

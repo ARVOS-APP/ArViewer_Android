@@ -43,7 +43,7 @@ public class Poi
 	public Float mLatitude = null;
 	public String mDeveloperKey;
 
-	public Augment mParent;
+	public ArvosAugment mParent;
 	public List<PoiObject> mPoiObjects;
 
 	private List<PoiObject> mObjectsToDeactivate = new LinkedList<PoiObject>();
@@ -58,7 +58,7 @@ public class Poi
 	 * @param augment
 	 *            The augment the poi belongs to.
 	 */
-	public Poi(Augment augment)
+	public Poi(ArvosAugment augment)
 	{
 		mParent = augment;
 		mPoiObjects = new LinkedList<PoiObject>();

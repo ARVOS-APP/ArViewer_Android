@@ -33,7 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mission_base.arviewer_android.viewer.Augment;
+import com.mission_base.arviewer_android.viewer.ArvosAugment;
 
 /**
  * Adapter used for displaying the list of augments.
@@ -41,13 +41,13 @@ import com.mission_base.arviewer_android.viewer.Augment;
  * @author peter
  * 
  */
-public class ArvosCustomArrayAdapter extends ArrayAdapter<Augment>
+public class ArvosCustomArrayAdapter extends ArrayAdapter<ArvosAugment>
 {
 	private final Activity context;
-	private final ArrayList<Augment> augments;
+	private final ArrayList<ArvosAugment> augments;
 	private final int imageId;
 
-	public ArvosCustomArrayAdapter(Activity context, ArrayList<Augment> augments, int imageId)
+	public ArvosCustomArrayAdapter(Activity context, ArrayList<ArvosAugment> augments, int imageId)
 	{
 		super(context, R.layout.lvrowlayout, augments);
 		this.context = context;

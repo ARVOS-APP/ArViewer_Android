@@ -2,10 +2,8 @@
     "name": "Augment 1",
     "pois": [
         {
-            #"lon" : 100.329052,
-            "lon" : 99.725113,
-            #"lat" : 5.421813,
-            "lat" : 6.293000,
+            "lon" : 11.577092,
+            "lat" : 48.129284,
             "poiObjects": [
                 {
                     "billboardHandling" : "sphere",

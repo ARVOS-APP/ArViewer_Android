@@ -63,7 +63,7 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		String augmentText = getIntent().getStringExtra("augmentText");
 		String augmentName = getIntent().getStringExtra("augmentName");
 
-		Augment augment = new Augment();
+		ArvosAugment augment = new ArvosAugment();
 		augment.parse(augmentText);
 		if (augment.mName == null)
 		{
@@ -79,7 +79,7 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		actionBar.setTitle("Retrieving textures");
 		actionBar.setSubtitle("Please wait ...");
 
-		Augment augment = mInstance.mAugment;
+		ArvosAugment augment = mInstance.mAugment;
 		synchronized (augment)
 		{
 			mArvosHttpRequest = null;
@@ -149,7 +149,7 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		}
 
 		String nextTexture = null;
-		Augment augment = Arvos.getInstance().mAugment;
+		ArvosAugment augment = Arvos.getInstance().mAugment;
 		synchronized (augment)
 		{
 			for (Poi poi : augment.mPois)

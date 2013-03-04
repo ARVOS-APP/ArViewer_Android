@@ -36,7 +36,7 @@ import org.json.*;
  * @author peter
  * 
  */
-public class Augment
+public class ArvosAugment
 {
 	public String mName;
 	public String mUrl;
@@ -48,7 +48,7 @@ public class Augment
 
 	public LinkedList<Poi> mPois;
 
-	public Augment()
+	public ArvosAugment()
 	{
 		mPois = new LinkedList<Poi>();
 	}
@@ -62,7 +62,7 @@ public class Augment
 	 *            The list of augments to parse to.
 	 * @return "OK" or "ER" followed by the error message.
 	 */
-	public static String parse(String input, List<Augment> result)
+	public static String parse(String input, List<ArvosAugment> result)
 	{
 		try
 		{
@@ -105,7 +105,7 @@ public class Augment
 				JSONObject jsonAugment = jsonAugments.getJSONObject(i);
 				if (jsonAugment != null)
 				{
-					Augment augment = new Augment();
+					ArvosAugment augment = new ArvosAugment();
 					result.add(augment);
 
 					augment.mName = jsonAugment.getString("name");

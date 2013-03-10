@@ -50,34 +50,36 @@ public class Arvos
 {
 	public boolean mSimulateWeb = false;
 
-	public boolean mUseCache = true;
 	public boolean mIsAuthor = false;
 	public String mAuthorKey;
 	public String mDeveloperKey;
+	public String mSessionId;
+	public float mLongitude = -1000f;
+	public float mLatitude = -1000f;
+	public int mVersion = 1;
+	
+	public float mAzimuth = 0;
+	public float mCorrectedAzimuth = 0;
+	public float mPitch = 0;
+	public float mRoll = 0;
+	
+	public boolean mUseCache = true;
+	
+	public int mWidth;
+	public int mHeight;
+	public long mFPS = 0;
+	
+	public ArvosAugment mAugment;
+	public String mAugmentsUrl = "http://www.mission-base.com/arvos/augments.json";
+
+	private int mOrientation = 0;
 
 	private static String mLock = "Lock";
 	private static Arvos mInstance = null;
 
 	private Activity mActivity;
 	private OrientationEventListener mListener;
-	private int mOrientation = 0;
 
-	public String mSessionId;
-	public float mLongitude = -1000f;
-	public float mLatitude = -1000f;
-	public int mVersion = 1;
-
-	public ArvosAugment mAugment;
-	public String mAugmentsUrl = "http://www.mission-base.com/arvos/augments.json";
-
-	public float mAzimuth = 0;
-	public float mCorrectedAzimuth = 0;
-	public float mPitch = 0;
-	public float mRoll = 0;
-	public long mFPS = 0;
-
-	public int mWidth;
-	public int mHeight;
 	public volatile boolean mHandleTouch = false;
 	public volatile boolean mModelViewMatrixesRequested = false;
 

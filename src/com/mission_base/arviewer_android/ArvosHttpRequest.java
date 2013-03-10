@@ -91,12 +91,60 @@ public class ArvosHttpRequest
 		new DownloadImageTask().execute(url);
 	}
 
+	private String createDownloadUrl(String url)
+	{
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("id=");
+		stringBuilder.append(mInstance.mSessionId == null ? "" : mInstance.mSessionId);
+		stringBuilder.append("&lat=");
+		stringBuilder.append(mInstance.mLatitude);
+		stringBuilder.append("&lon=");
+		stringBuilder.append(mInstance.mLongitude);
+		stringBuilder.append("&azi=");
+		stringBuilder.append(mInstance.mCorrectedAzimuth);
+
+		boolean isAuthor = mInstance.mIsAuthor;
+		stringBuilder.append("&aut=");
+		stringBuilder.append(isAuthor);
+		stringBuilder.append("&ver=");
+		stringBuilder.append(mInstance.mVersion);
+		stringBuilder.append("&ver=");
+		stringBuilder.append(mInstance.mVersion);
+		stringBuilder.append("&plat=Android");
+
+		if (mInstance.mAugmentsUrl.equals(url))
+		{
+			String key = mInstance.mAuthorKey;
+			if (isAuthor && key != null && key.length() >= 20)
+			{
+				stringBuilder.append("&akey=");
+				stringBuilder.append(urlEncode(key));
+			}
+
+			key = mInstance.mDeveloperKey;
+			if (key != null && key.length() > 0)
+			{
+				stringBuilder.append("&dkey=");
+				stringBuilder.append(urlEncode(key));
+			}
+		}
+
+		if (url.contains("?"))
+		{
+			return url.replaceFirst("?", "?" + stringBuilder.toString() + "&");
+		}
+		else if (url.contains("#"))
+		{
+			return url.replaceFirst("#", "#" + stringBuilder.toString() + "&");
+		}
+		else
+		{
+			return url + "#" + stringBuilder.toString();
+		}
+	}
+	
 	private String downloadText(String url)
 	{
-		float latitude = mInstance.mLatitude;
-		float longitude = mInstance.mLongitude;
-		float azimuth = mInstance.mCorrectedAzimuth;
-
 		InputStream inputStream = null;
 		if (mInstance.mSimulateWeb)
 		{
@@ -160,53 +208,8 @@ public class ArvosHttpRequest
 			}
 		}
 
+		url = createDownloadUrl(url);
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("id=");
-		stringBuilder.append(mInstance.mSessionId == null ? "" : mInstance.mSessionId);
-		stringBuilder.append("&lat=");
-		stringBuilder.append(latitude);
-		stringBuilder.append("&lon=");
-		stringBuilder.append(longitude);
-		stringBuilder.append("&azi=");
-		stringBuilder.append(azimuth);
-
-		boolean isAuthor = mInstance.mIsAuthor;
-		stringBuilder.append("&aut=");
-		stringBuilder.append(isAuthor);
-		stringBuilder.append("&ver=");
-		stringBuilder.append(mInstance.mVersion);
-
-		if (mInstance.mAugmentsUrl.equals(url))
-		{
-			String key = mInstance.mAuthorKey;
-			if (isAuthor && key != null && key.length() >= 20)
-			{
-				stringBuilder.append("&akey=");
-				stringBuilder.append(urlEncode(key));
-			}
-
-			key = mInstance.mDeveloperKey;
-			if (key != null && key.length() > 0)
-			{
-				stringBuilder.append("&dkey=");
-				stringBuilder.append(urlEncode(key));
-			}
-		}
-
-		if (url.contains("?"))
-		{
-			url = url.replaceFirst("?", "?" + stringBuilder.toString() + "&");
-		}
-		else if (url.contains("#"))
-		{
-			url = url.replaceFirst("#", "#" + stringBuilder.toString() + "&");
-		}
-		else
-		{
-			url = url + "#" + stringBuilder.toString();
-		}
-
-		stringBuilder = new StringBuilder();
 		stringBuilder.append("OK");
 
 		try
@@ -393,7 +396,7 @@ public class ArvosHttpRequest
 		protected String doInBackground(String... urls)
 		{
 			url = urls[0];
-			return downloadText(urls[0]);
+			return downloadText(url);
 		}
 
 		@Override

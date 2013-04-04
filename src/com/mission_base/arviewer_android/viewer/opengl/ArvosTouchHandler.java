@@ -113,7 +113,7 @@ public class ArvosTouchHandler extends Thread
 		int id = 0;
 		boolean found = false;
 
-		float[] convertedSquare = new float[Square.vertices.length];
+		float[] convertedSquare = new float[ArvosSquare.vertices.length];
 		float[] resultVector = new float[4];
 		float[] inputVector = new float[4];
 
@@ -136,11 +136,11 @@ public class ArvosTouchHandler extends Thread
 
 				Ray ray = new Ray(modelView, projection, mInstance.mWidth, mInstance.mHeight, x, y);
 
-				for (int i = 0; i < Square.vertices.length; i = i + 3)
+				for (int i = 0; i < ArvosSquare.vertices.length; i = i + 3)
 				{
-					inputVector[0] = Square.vertices[i];
-					inputVector[1] = Square.vertices[i + 1];
-					inputVector[2] = Square.vertices[i + 2];
+					inputVector[0] = ArvosSquare.vertices[i];
+					inputVector[1] = ArvosSquare.vertices[i + 1];
+					inputVector[2] = ArvosSquare.vertices[i + 2];
 					inputVector[3] = 1;
 
 					Matrix.multiplyMV(resultVector, 0, modelView, 0, inputVector, 0);

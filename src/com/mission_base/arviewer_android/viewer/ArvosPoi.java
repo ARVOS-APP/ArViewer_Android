@@ -31,11 +31,12 @@ import org.json.*;
 
 /**
  * A poi - point of interest.
- * 
+ * <p>
+ * Contains a list of poiObjects.
  * @author peter
  * 
  */
-public class Poi
+public class ArvosPoi
 {
 	public long mAnimationDuration;
 
@@ -44,11 +45,11 @@ public class Poi
 	public String mDeveloperKey;
 
 	public ArvosAugment mParent;
-	public List<PoiObject> mPoiObjects;
+	public List<ArvosPoiObject> mPoiObjects;
 
-	private List<PoiObject> mObjectsToDeactivate = new LinkedList<PoiObject>();
-	private List<PoiObject> mObjectsToStart = new LinkedList<PoiObject>();
-	private List<PoiObject> mObjectsClicked = new LinkedList<PoiObject>();
+	private List<ArvosPoiObject> mObjectsToDeactivate = new LinkedList<ArvosPoiObject>();
+	private List<ArvosPoiObject> mObjectsToStart = new LinkedList<ArvosPoiObject>();
+	private List<ArvosPoiObject> mObjectsClicked = new LinkedList<ArvosPoiObject>();
 
 	private Arvos mInstance;
 
@@ -58,10 +59,10 @@ public class Poi
 	 * @param augment
 	 *            The augment the poi belongs to.
 	 */
-	public Poi(ArvosAugment augment)
+	public ArvosPoi(ArvosAugment augment)
 	{
 		mParent = augment;
-		mPoiObjects = new LinkedList<PoiObject>();
+		mPoiObjects = new LinkedList<ArvosPoiObject>();
 		mInstance = Arvos.getInstance();
 	}
 
@@ -95,11 +96,11 @@ public class Poi
 
 		for (int i = 0; i < jsonPoiObjects.length(); i++)
 		{
-			JSONObject jsonPoiObject = jsonPoiObjects.getJSONObject(i);
-			if (jsonPoiObject != null)
+			JSONObject newPoiObject = jsonPoiObjects.getJSONObject(i);
+			if (newPoiObject != null)
 			{
-				PoiObject poiObject = new PoiObject(this);
-				poiObject.parse(jsonPoiObject);
+				ArvosPoiObject poiObject = new ArvosPoiObject(this);
+				poiObject.parse(newPoiObject);
 				mPoiObjects.add(poiObject);
 			}
 		}
@@ -131,13 +132,13 @@ public class Poi
 		if (mLatitude != null)
 		{
 			poiLatitude = mLatitude;
-			Location currentLoction = new Location(LocationManager.GPS_PROVIDER);
-			currentLoction.setLatitude(deviceLatitude);
+			Location currentLocation = new Location(LocationManager.GPS_PROVIDER);
+			currentLocation.setLatitude(deviceLatitude);
 
 			Location poiLocation = new Location(LocationManager.GPS_PROVIDER);
 			poiLocation.setLatitude(poiLatitude);
 
-			offsetZ = currentLoction.distanceTo(poiLocation);
+			offsetZ = currentLocation.distanceTo(poiLocation);
 			if (deviceLatitude > poiLatitude)
 			{
 				if (offsetZ < 0)
@@ -157,13 +158,13 @@ public class Poi
 		if (mLongitude != null)
 		{
 			poiLongitude = mLongitude;
-			Location currentLoction = new Location(LocationManager.GPS_PROVIDER);
-			currentLoction.setLatitude(deviceLongitude);
+			Location currentLocation = new Location(LocationManager.GPS_PROVIDER);
+			currentLocation.setLongitude(deviceLongitude);
 
 			Location poiLocation = new Location(LocationManager.GPS_PROVIDER);
-			poiLocation.setLatitude(poiLongitude);
+			poiLocation.setLongitude(poiLongitude);
 
-			offsetX = currentLoction.distanceTo(poiLocation);
+			offsetX = currentLocation.distanceTo(poiLocation);
 			if (deviceLongitude > poiLongitude)
 			{
 				if (offsetX > 0)
@@ -181,7 +182,7 @@ public class Poi
 		}
 
 		HashSet<String> objectsToDraw = new HashSet<String>();
-		for (PoiObject poiObject : mPoiObjects)
+		for (ArvosPoiObject poiObject : mPoiObjects)
 		{
 			ArvosObject arvosObject = poiObject.getObject(time, arvosObjects);
 			if (arvosObject != null)
@@ -196,19 +197,19 @@ public class Poi
 
 		synchronized (mObjectsClicked)
 		{
-			for (PoiObject poiObject : mObjectsClicked)
+			for (ArvosPoiObject poiObject : mObjectsClicked)
 			{
 				poiObject.onClick();
 			}
 			mObjectsClicked.clear();
 		}
 
-		for (PoiObject poiObject : mObjectsToDeactivate)
+		for (ArvosPoiObject poiObject : mObjectsToDeactivate)
 		{
 			poiObject.stop();
 		}
 
-		for (PoiObject poiObject : mObjectsToStart)
+		for (ArvosPoiObject poiObject : mObjectsToStart)
 		{
 			poiObject.start(time);
 
@@ -233,18 +234,18 @@ public class Poi
 	 * @param name
 	 * @return
 	 */
-	public PoiObject findPoiObject(String name)
+	public ArvosPoiObject findPoiObject(String name)
 	{
-		for (PoiObject poiObject : mPoiObjects)
+		for (ArvosPoiObject poiObject : mPoiObjects)
 		{
 			if (name.equals(poiObject.mName))
 			{
 				return poiObject;
 			}
 		}
-		for (Poi poi : mParent.mPois)
+		for (ArvosPoi poi : mParent.mPois)
 		{
-			for (PoiObject poiObject : poi.mPoiObjects)
+			for (ArvosPoiObject poiObject : poi.mPoiObjects)
 			{
 				if (name.equals(poiObject.mName))
 				{
@@ -261,11 +262,11 @@ public class Poi
 	 * @param id
 	 * @return
 	 */
-	public PoiObject findPoiObject(int id)
+	public ArvosPoiObject findPoiObject(int id)
 	{
-		for (Poi poi : mParent.mPois)
+		for (ArvosPoi poi : mParent.mPois)
 		{
-			for (PoiObject poiObject : poi.mPoiObjects)
+			for (ArvosPoiObject poiObject : poi.mPoiObjects)
 			{
 				if (id == poiObject.mId)
 				{
@@ -281,7 +282,7 @@ public class Poi
 	 * 
 	 * @param poiObject
 	 */
-	public void requestActivate(PoiObject poiObject)
+	public void requestActivate(ArvosPoiObject poiObject)
 	{
 		poiObject.mIsActive = true;
 		requestStart(poiObject);
@@ -292,7 +293,7 @@ public class Poi
 	 * 
 	 * @param poiObject
 	 */
-	public void requestStart(PoiObject poiObject)
+	public void requestStart(ArvosPoiObject poiObject)
 	{
 		mObjectsToStart.add(poiObject);
 	}
@@ -302,7 +303,7 @@ public class Poi
 	 * 
 	 * @param poiObject
 	 */
-	public void requestStop(PoiObject poiObject)
+	public void requestStop(ArvosPoiObject poiObject)
 	{
 		mObjectsToDeactivate.add(poiObject);
 	}
@@ -312,7 +313,7 @@ public class Poi
 	 * 
 	 * @param poiObject
 	 */
-	public void requestDeactivate(PoiObject poiObject)
+	public void requestDeactivate(ArvosPoiObject poiObject)
 	{
 		poiObject.mIsActive = false;
 		requestStop(poiObject);
@@ -323,7 +324,7 @@ public class Poi
 	 * 
 	 * @param poiObject
 	 */
-	public void addClick(PoiObject poiObject)
+	public void addClick(ArvosPoiObject poiObject)
 	{
 		synchronized (mObjectsClicked)
 		{

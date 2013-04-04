@@ -34,7 +34,6 @@ import org.json.*;
  * Contains a list of pois.
  * 
  * @author peter
- * 
  */
 public class ArvosAugment
 {
@@ -46,11 +45,11 @@ public class ArvosAugment
 	public Float mLatitude;
 	public String mDeveloperKey;
 
-	public LinkedList<Poi> mPois;
+	public LinkedList<ArvosPoi> mPois;
 
 	public ArvosAugment()
 	{
-		mPois = new LinkedList<Poi>();
+		mPois = new LinkedList<ArvosPoi>();
 	}
 
 	/**
@@ -153,11 +152,11 @@ public class ArvosAugment
 
 			for (int i = 0; i < jsonPois.length(); i++)
 			{
-				JSONObject jsonPoi = jsonPois.getJSONObject(i);
-				if (jsonPoi != null)
+				JSONObject newPoi = jsonPois.getJSONObject(i);
+				if (newPoi != null)
 				{
-					Poi poi = new Poi(this);
-					poi.parse(jsonPoi);
+					ArvosPoi poi = new ArvosPoi(this);
+					poi.parse(newPoi);
 					mPois.add(poi);
 				}
 			}
@@ -185,7 +184,7 @@ public class ArvosAugment
 
 		synchronized (mPois)
 		{
-			for (Poi poi : mPois)
+			for (ArvosPoi poi : mPois)
 			{
 				poi.getObjects(time, result, arvosObjects);
 			}
@@ -205,8 +204,8 @@ public class ArvosAugment
 		{
 			if (!mPois.isEmpty())
 			{
-				Poi poi = mPois.getFirst();
-				PoiObject poiObject = poi.findPoiObject(id);
+				ArvosPoi poi = mPois.getFirst();
+				ArvosPoiObject poiObject = poi.findPoiObject(id);
 				if (poiObject != null)
 				{
 					poiObject.mParent.addClick(poiObject);

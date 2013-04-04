@@ -44,7 +44,7 @@ import com.mission_base.arviewer_android.viewer.opengl.*;
 public class ArvosViewer extends Activity implements IArvosLocationReceiver, IArvosHttpReceiver
 {
 	public ArvosCameraView mCameraView = null;
-	public ArvosGLSurfaceView mGLSurfaceView = null;
+	public ArvosGLView mGLSurfaceView = null;
 	public ArvosTextView mTextView = null;
 	public ArvosRadarView mRadarView = null;
 
@@ -83,14 +83,14 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		synchronized (augment)
 		{
 			mArvosHttpRequest = null;
-			for (Poi poi : augment.mPois)
+			for (ArvosPoi poi : augment.mPois)
 			{
-				for (PoiObject poiObject : poi.mPoiObjects)
+				for (ArvosPoiObject poiObject : poi.mPoiObjects)
 				{
-					if (poiObject.mTexture != null && poiObject.mBitmap == null)
+					if (poiObject.mTextureUrl != null && poiObject.mImage == null)
 					{
 						mArvosHttpRequest = new ArvosHttpRequest(this, this);
-						mArvosHttpRequest.getImage(poiObject.mTexture);
+						mArvosHttpRequest.getImage(poiObject.mTextureUrl);
 						break;
 					}
 				}
@@ -152,17 +152,17 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		ArvosAugment augment = Arvos.getInstance().mAugment;
 		synchronized (augment)
 		{
-			for (Poi poi : augment.mPois)
+			for (ArvosPoi poi : augment.mPois)
 			{
-				for (PoiObject poiObject : poi.mPoiObjects)
+				for (ArvosPoiObject poiObject : poi.mPoiObjects)
 				{
-					if (url.equals(poiObject.mTexture))
+					if (url.equals(poiObject.mTextureUrl))
 					{
-						poiObject.mBitmap = bitmap;
+						poiObject.mImage = bitmap;
 					}
-					else if (poiObject.mTexture != null && poiObject.mBitmap == null)
+					else if (poiObject.mTextureUrl != null && poiObject.mImage == null)
 					{
-						nextTexture = poiObject.mTexture;
+						nextTexture = poiObject.mTextureUrl;
 					}
 				}
 			}
@@ -190,7 +190,7 @@ public class ArvosViewer extends Activity implements IArvosLocationReceiver, IAr
 		mCameraView = new ArvosCameraView(this);
 		frame.addView(mCameraView);
 
-		mGLSurfaceView = new ArvosGLSurfaceView(this);
+		mGLSurfaceView = new ArvosGLView(this);
 		frame.addView(mGLSurfaceView);
 
 		mRadarView = new ArvosRadarView(this);

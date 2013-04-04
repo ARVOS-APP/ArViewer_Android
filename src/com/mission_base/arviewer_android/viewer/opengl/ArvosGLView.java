@@ -36,11 +36,11 @@ import com.mission_base.arviewer_android.Arvos;
  * @author peter
  * 
  */
-public class ArvosGLSurfaceView extends GLSurfaceView
+public class ArvosGLView extends GLSurfaceView
 {
 	private Arvos mInstance;
 
-	public ArvosGLSurfaceView(Context context)
+	public ArvosGLView(Context context)
 	{
 		super(context);
 

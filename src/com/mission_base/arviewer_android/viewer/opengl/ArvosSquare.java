@@ -42,7 +42,7 @@ import android.opengl.GLUtils;
  * @author peter
  * 
  */
-public class Square
+public class ArvosSquare
 {
 	private FloatBuffer vertexBuffer; // buffer holding the vertices
 
@@ -64,7 +64,7 @@ public class Square
 			1.0f, 0.0f // bottom right (V3)
 	};
 
-	public Square()
+	public ArvosSquare()
 	{
 		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(vertices.length * 4);
 		byteBuffer.order(ByteOrder.nativeOrder());
@@ -93,20 +93,18 @@ public class Square
 		bitmap.recycle();
 	}
 
-	public void loadGLTexture(GL10 gl, Bitmap bitmap)
+	public void loadGLTexture(GL10 gl, Bitmap image)
 	{
-		// generate one texture pointer
+		// generate one texture pointer and bind it to the array of this arvos square
 		gl.glGenTextures(1, textures, 0);
-		// ...and bind it to our array
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textures[0]);
 
 		// create nearest filtered texture
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_NEAREST);
 		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
 
-		// Use Android GLUtils to specify a two-dimensional texture image from
-		// our bitmap
-		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+		// Use Android GLUtils to specify a two-dimensional texture image from our bitmap
+		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, image, 0);
 	}
 
 	/** The draw method for the square with the GL context */

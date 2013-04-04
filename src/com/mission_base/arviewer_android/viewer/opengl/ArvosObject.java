@@ -36,7 +36,7 @@ import com.mission_base.arviewer_android.viewer.utilities.MatrixUtils;
  * @author peter
  * 
  */
-public class ArvosObject extends Square
+public class ArvosObject extends ArvosSquare
 {
 	public static final String BillboardHandlingNone = "none";
 	public static final String BillboardHandlingCylinder = "cylinder";
@@ -44,13 +44,13 @@ public class ArvosObject extends Square
 
 	public int mId;
 	public String mName;
-	public String mTexture;
+	public String mTextureUrl;
 	public float[] mPosition;
 	public float[] mScale;
 	public float[] mRotation;
 	public String mBillboardHandling;
 
-	public Bitmap mBitmap;
+	public Bitmap mImage;
 
 	public boolean mTextureLoaded = false;
 
@@ -69,9 +69,9 @@ public class ArvosObject extends Square
 	{
 		if (!mTextureLoaded)
 		{
-			if (mBitmap != null)
+			if (mImage != null)
 			{
-				loadGLTexture(gl, mBitmap);
+				loadGLTexture(gl, mImage);
 			}
 
 			mTextureLoaded = true;

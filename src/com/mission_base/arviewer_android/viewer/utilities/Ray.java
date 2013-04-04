@@ -42,11 +42,7 @@ public class Ray
 
 		float winx = xTouch, winy = (float) viewport[3] - yTouch;
 
-		// Log.d(TAG, "modelView is =" +
-		// Arrays.toString(matrixGrabber.mModelView));
-		// Log.d(TAG, "projection view is =" + Arrays.toString(
-		// matrixGrabber.mProjection ));
-
+		temp[3] = 0;
 		int result = GLU.gluUnProject(winx, winy, 1.0f, modelView, 0, projection, 0, viewport, 0, temp, 0);
 
 		Matrix.multiplyMV(temp2, 0, modelView, 0, temp, 0);
@@ -57,6 +53,7 @@ public class Ray
 			nearCoOrds[2] = temp2[2] / temp2[3];
 		}
 
+		temp[3] = 0;   
 		result = GLU.gluUnProject(winx, winy, 0, modelView, 0, projection, 0, viewport, 0, temp, 0);
 		Matrix.multiplyMV(temp2, 0, modelView, 0, temp, 0);
 		if (result == GL10.GL_TRUE)

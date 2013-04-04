@@ -223,7 +223,7 @@ public class Arvos
 		mListener.disable();
 	}
 
-	private static float toDegreesFactor = 180 / 3.14159f;
+	private static float toDegreesFactor = 180 / 3.141593f;
 
 	/**
 	 * Converts the radians given as parameter to degrees.

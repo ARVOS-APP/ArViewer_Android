@@ -33,24 +33,16 @@ import org.json.*;
  * A poi object as shown in the opengl view.
  * 
  * @author peter
- * 
  */
-public class PoiObject
+public class ArvosPoiObject
 {
-	private static int mNextId = 0;
-
-	private static int getNextId()
-	{
-		return ++mNextId;
-	}
-
 	public int mId;
 	public String mName;
-	public String mTexture;
+	public String mTextureUrl;
 	public String mBillboardHandling;
 
 	public long mStartTime;
-	public long mDuration;
+	public long mAnimationDuration;
 
 	public boolean mLoop;
 	public boolean mIsActive;
@@ -63,34 +55,40 @@ public class PoiObject
 	public List<String> mOnDurationEndActivates;
 	public List<String> mOnDurationEndDeactivates;
 
-	public float[] mStartPosition;
-	public float[] mEndPosition;
+	private float[] mStartPosition;
+	private float[] mEndPosition;
 
-	public float[] mStartScale;
-	public float[] mEndScale;
+	private float[] mStartScale;
+	private float[] mEndScale;
 
-	public float[] mStartRotation;
-	public float[] mEndRotation;
+	private float[] mStartRotation;
+	private float[] mEndRotation;
 
 	public long mTimeStarted;
-	public Poi mParent;
+	public ArvosPoi mParent;
 
-	public Bitmap mBitmap;
+	public Bitmap mImage;
 
 	/**
 	 * Create a poi object.
 	 * 
 	 * @param parent
-	 *            The poi the object belongs to.
+	 *            The poi the poi object belongs to.
 	 */
-	public PoiObject(Poi parent)
+	public ArvosPoiObject(ArvosPoi parent)
 	{
 		mId = getNextId();
 		mParent = parent;
-		mDuration = parent.mAnimationDuration;
+		mAnimationDuration = parent.mAnimationDuration;
 		mIsActive = true;
 	}
 
+	private static int mNextId = 0;
+	private static int getNextId()
+	{
+		return ++mNextId;
+	}
+	
 	/**
 	 * Parses one poi object.
 	 * 
@@ -103,20 +101,20 @@ public class PoiObject
 	{
 		if (jsonPoiObject != null)
 		{
-			mTexture = jsonPoiObject.getString("texture");
+			mTextureUrl = jsonPoiObject.getString("texture");
 
 			mName = jsonPoiObject.has("name") ? jsonPoiObject.getString("name") : null;
 			mBillboardHandling = jsonPoiObject.has("billboardHandling") ? jsonPoiObject.getString("billboardHandling") : null;
 			if (mBillboardHandling != null //
-					&& !ArvosObject.BillboardHandlingCylinder.equals(mBillboardHandling) //
 					&& !ArvosObject.BillboardHandlingNone.equals(mBillboardHandling) //
+					&& !ArvosObject.BillboardHandlingCylinder.equals(mBillboardHandling) //
 					&& !ArvosObject.BillboardHandlingSphere.equals(mBillboardHandling))
 			{
 				throw new JSONException("Illegal value for billboardHandling: " + mBillboardHandling);
 			}
 
 			mStartTime = jsonPoiObject.has("startTime") ? jsonPoiObject.getInt("startTime") : 0;
-			mDuration = jsonPoiObject.has("duration") ? jsonPoiObject.getInt("duration") : 0;
+			mAnimationDuration = jsonPoiObject.has("duration") ? jsonPoiObject.getInt("duration") : 0;
 			mLoop = jsonPoiObject.has("loop") ? jsonPoiObject.getBoolean("loop") : true;
 			mIsActive = jsonPoiObject.has("isActive") ? jsonPoiObject.getBoolean("isActive") : true;
 
@@ -288,6 +286,8 @@ public class PoiObject
 	 */
 	public ArvosObject getObject(long time, List<ArvosObject> arvosObjects)
 	{
+		ArvosObject result = null;
+
 		if (mWorldStartTime < 0)
 		{
 			mWorldStartTime = time;
@@ -296,19 +296,17 @@ public class PoiObject
 
 		if (!mIsActive)
 		{
-			return null;
+			return result;
 		}
 
-		ArvosObject result = null;
-
-		long duration = (mDuration > 0) ? mDuration : mParent.mAnimationDuration;
+		long duration = (mAnimationDuration > 0) ? mAnimationDuration : mParent.mAnimationDuration;
 		if (mParent.mAnimationDuration <= 0 || duration <= 0)
 		{
 			// No animation, use start values
 			//
 			result = findArvosObject(arvosObjects);
 			result.mName = mName;
-			result.mTexture = mTexture;
+			result.mTextureUrl = mTextureUrl;
 			result.mBillboardHandling = mBillboardHandling;
 			if (result.mPosition == null)
 			{
@@ -319,7 +317,7 @@ public class PoiObject
 			result.mPosition[2] = mStartPosition[2];
 			result.mScale = mStartScale;
 			result.mRotation = mStartRotation;
-			result.mBitmap = mBitmap;
+			result.mImage = mImage;
 
 			return result;
 		}
@@ -333,7 +331,7 @@ public class PoiObject
 			return null;
 		}
 
-		if (mTexture == null)
+		if (mTextureUrl == null)
 		{
 			return null;
 		}
@@ -349,12 +347,12 @@ public class PoiObject
 
 		result = findArvosObject(arvosObjects);
 		result.mName = mName;
-		result.mTexture = mTexture;
+		result.mTextureUrl = mTextureUrl;
 		result.mBillboardHandling = mBillboardHandling;
 		result.mPosition = mStartPosition;
 		result.mScale = mStartScale;
 		result.mRotation = mStartRotation;
-		result.mBitmap = mBitmap;
+		result.mImage = mImage;
 
 		if (mStartPosition != null && mEndPosition != null && factor > 0)
 		{
@@ -430,7 +428,7 @@ public class PoiObject
 		{
 			for (String otherObjectName : activates)
 			{
-				PoiObject poiObject = mParent.findPoiObject(otherObjectName);
+				ArvosPoiObject poiObject = mParent.findPoiObject(otherObjectName);
 				if (poiObject != null)
 				{
 					poiObject.mIsActive = true;
@@ -442,7 +440,7 @@ public class PoiObject
 		{
 			for (String otherObjectName : deactivates)
 			{
-				PoiObject poiObject = mParent.findPoiObject(otherObjectName);
+				ArvosPoiObject poiObject = mParent.findPoiObject(otherObjectName);
 				if (poiObject != null)
 				{
 					poiObject.mIsActive = false;

@@ -171,7 +171,7 @@ public class ArvosRadarView extends View
 				SensorManager.getOrientation(Rmat, mOrientation);
 				mAngleFilteredAzimuth = calculateFilteredAngle(Arvos.toDegrees(mOrientation[0]), mAngleFilteredAzimuth);
 				mAngleFilteredPitch = calculateFilteredAngle(Arvos.toDegrees(mOrientation[1]), mAngleFilteredPitch);
-				mAngleFilteredRoll = calculateFilteredAngle(-Arvos.toDegrees(mOrientation[2]), mAngleFilteredRoll);
+				mAngleFilteredRoll = calculateFilteredAngle(Arvos.toDegrees(mOrientation[2]), mAngleFilteredRoll);
 			}
 			mGravity = null; // full new refresh
 			mGeomagnetic = null;

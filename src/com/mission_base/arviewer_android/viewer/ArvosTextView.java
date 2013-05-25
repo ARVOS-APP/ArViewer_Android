@@ -73,6 +73,6 @@ public class ArvosTextView extends TextView
 				+ "\nDeg:" + Arvos.getInstance().mCorrectedAzimuth //
 		;
 
-		setText("Your Current mPosition is:\n" + latLongString);
+		setText(latLongString);
 	}
 }

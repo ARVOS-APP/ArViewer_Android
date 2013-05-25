@@ -140,7 +140,7 @@ public class ArvosRenderer implements Renderer
 
 		// Apply azimut, pitch and roll of the device
 		//
-		gl.glRotatef(mInstance.mRoll, 0f, 0f, -1f);
+		gl.glRotatef(mInstance.mRoll, 0f, 0f, 1f);
 		gl.glRotatef(mInstance.mPitch, 1f, 0f, 0f);
 		gl.glRotatef(mInstance.mAzimuth, 0f, 1f, 0f);
 

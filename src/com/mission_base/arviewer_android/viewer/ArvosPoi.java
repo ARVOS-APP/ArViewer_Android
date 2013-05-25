@@ -208,6 +208,7 @@ public class ArvosPoi
 		{
 			poiObject.stop();
 		}
+		mObjectsToDeactivate.clear();
 
 		for (ArvosPoiObject poiObject : mObjectsToStart)
 		{
@@ -223,8 +224,6 @@ public class ArvosPoi
 				}
 			}
 		}
-
-		mObjectsToDeactivate.clear();
 		mObjectsToStart.clear();
 	}
 

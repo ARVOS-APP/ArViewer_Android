@@ -103,7 +103,7 @@ public class ArvosPoiObject
 		{
 			mTextureUrl = jsonPoiObject.getString("texture");
 
-			mName = jsonPoiObject.has("name") ? jsonPoiObject.getString("name") : null;
+			mName = jsonPoiObject.has("name") ? jsonPoiObject.getString("name") : ("\" " + mId);
 			mBillboardHandling = jsonPoiObject.has("billboardHandling") ? jsonPoiObject.getString("billboardHandling") : null;
 			if (mBillboardHandling != null //
 					&& !ArvosObject.BillboardHandlingNone.equals(mBillboardHandling) //

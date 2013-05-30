@@ -29,6 +29,34 @@ public class Ray
 	public float[] P0;
 	public float[] P1;
 
+	/*
+	private boolean GluUnProject(float winx, float winy, float winz, float[] model, float[] proj, int[] viewport, float[] obj)
+	{
+		float[] m = new float[16];
+		float[][] mm = new float[4][4];
+		float[] A = new float[16];
+		float[][] Am = new float[4][4];
+		float[] in = new float[4];
+
+		//Matrix.multiplyMM(A, 0, proj, 0, model, 0);
+		MatrixUtils.multiply(MatrixUtils.matrix(proj), MatrixUtils.matrix(model), Am);
+		A = MatrixUtils.vector(Am);
+		
+		//Matrix.invertM(A, 0, m, 0);
+		MatrixUtils.inverse(Am, mm);
+
+		in[0] = (winx - viewport[0]) * 2.0f / viewport[2] - 1.0f;
+		in[1] = (winy - viewport[1]) * 2.0f / viewport[3] - 1.0f;
+		in[2] = 2.0f * winz - 1.0f;
+		in[3] = 1.0f;
+
+		//Matrix.multiplyMV(obj, 0, m, 0, in, 0);
+		MatrixUtils.multiply(mm, in, obj);
+
+		return true;
+	}
+	*/
+
 	public Ray(float[] modelView, float[] projection, int width, int height, float xTouch, float yTouch)
 	{
 		int[] viewport = { 0, 0, width, height };

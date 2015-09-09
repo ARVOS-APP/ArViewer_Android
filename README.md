@@ -1,6 +1,6 @@
 ArViewer_Android
 ================
 
-Arvos Android version.
+ARVOS ArViewer for Android with integration of 2d augments.
 
-An open source augmented reality viewer.
+ARVOS - An open source augmented reality viewer.
